@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://br7u2y2vivpuh"]
+
+[ext_resource type="Script" path="res://field.gd" id="1_0cutk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cutk"]
+size = Vector2(900, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujqnb"]
+size = Vector2(900, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6e7u2"]
+size = Vector2(20, 600)
+
+[node name="Field" type="Node2D"]
+script = ExtResource("1_0cutk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 900.0
+offset_bottom = 600.0
+color = Color(0, 0, 0, 1)
+
+[node name="TopBarrier" type="Area2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="TopBarrier"]
+points = PackedVector2Array(0, 2, 900, 2)
+width = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBarrier"]
+position = Vector2(450, 2)
+shape = SubResource("RectangleShape2D_0cutk")
+
+[node name="BottomBarrier" type="Area2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="BottomBarrier"]
+points = PackedVector2Array(0, 598, 900, 598)
+width = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBarrier"]
+position = Vector2(450, 598)
+shape = SubResource("RectangleShape2D_ujqnb")
+
+[node name="DefeatZone" type="Area2D" parent="."]
+position = Vector2(10, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefeatZone"]
+shape = SubResource("RectangleShape2D_6e7u2")
+
+[node name="VictoryZone" type="Area2D" parent="."]
+position = Vector2(890, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VictoryZone"]
+shape = SubResource("RectangleShape2D_6e7u2")

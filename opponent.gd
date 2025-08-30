@@ -1,4 +1,4 @@
-extends Area2D
+extends "res://paddle.gd"
 
 @export var speed = 150
 
@@ -11,7 +11,9 @@ func _track_ball(delta: float) -> void:
 	var y_delta = ball.position.y - position.y
 	var direction = y_delta / abs(y_delta)
 
-	position.y += direction * speed * delta
+	vertical_velocity = direction * speed
+	print(vertical_velocity)
+	_move(delta)
 
 func _process(delta: float) -> void:
 	_track_ball(delta)

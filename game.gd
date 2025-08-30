@@ -52,7 +52,6 @@ func _handle_bounce() -> void:
 		(ball.position.y >= screen_size.y - 5 and ball_velocity.y > 0)
 	):
 		ball_velocity = Vector2(ball_velocity.x, -1 * ball_velocity.y)
-		print(ball_velocity)
 
 	# Handle player/enemy hit
 
@@ -63,14 +62,19 @@ func _process(delta: float) -> void:
 		
 	ball.position += ball_velocity * ball_speed * delta
 
-func _horizontal_bounce() -> void:
-	print("nice")
-	ball_velocity = Vector2(-1 * ball_velocity.x, ball_velocity.y)
+func _horizontal_bounce(surface: Paddle) -> void:
+	var surface_spin = surface.vertical_velocity / 1000
 
+	ball_velocity = Vector2(
+		-1 * ball_velocity.x,
+		ball_velocity.y + surface_spin
+	).normalized()
+
+	
 func _on_ball_area_entered(area: Area2D) -> void:
 	match area.name:
 		player.name, opponent.name:
-			_horizontal_bounce()
+			_horizontal_bounce(area)
 		defeat_zone_id:
 			opponent_score_point()
 		victory_zone_id:

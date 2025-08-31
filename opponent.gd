@@ -5,6 +5,7 @@ extends "res://paddle.gd"
 var ball: Area2D
 
 func _ready() -> void:
+	super._ready()
 	ball = get_parent().get_node("Ball")
 
 func _track_ball(delta: float) -> void:

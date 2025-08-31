@@ -58,7 +58,7 @@ func score_point() -> void:
 	reset_game()
 
 
-func _handle_bounce() -> void:
+func _barrier_bounce() -> void:
 	if (
 		(ball.position.y <= 5.0 and ball_velocity.y < 0) or
 		(ball.position.y >= screen_size.y - 5 and ball_velocity.y > 0)
@@ -67,11 +67,11 @@ func _handle_bounce() -> void:
 
 	 
 func _process(delta: float) -> void:
-	_handle_bounce()
+	_barrier_bounce()
 		
 	ball.position += ball_velocity * ball_speed * delta
 
-func _horizontal_bounce(surface: Paddle) -> void:
+func _paddle_bounce(surface: Paddle) -> void:
 	var surface_spin = surface.vertical_velocity / 1000
 
 	ball_velocity = Vector2(
@@ -83,7 +83,7 @@ func _horizontal_bounce(surface: Paddle) -> void:
 func _on_ball_area_entered(area: Area2D) -> void:
 	match area.name:
 		player.name, opponent.name:
-			_horizontal_bounce(area)
+			_paddle_bounce(area)
 		defeat_zone_id:
 			opponent_score_point()
 		victory_zone_id:

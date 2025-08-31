@@ -2,6 +2,7 @@ extends Node2D
 
 @export var ball_speed: int = 200
 @export var initial_position = Vector2(450, 300)
+@export var spin_coeff: int = 15
 
 var ball: Area2D
 var ball_velocity: Vector2
@@ -72,7 +73,7 @@ func _process(delta: float) -> void:
 	ball.position += ball_velocity * ball_speed * delta
 
 func _paddle_bounce(surface: Paddle) -> void:
-	var surface_spin = surface.vertical_velocity / 1000
+	var surface_spin = surface.vertical_velocity * spin_coeff / 10000
 
 	ball_velocity = Vector2(
 		-1 * ball_velocity.x,

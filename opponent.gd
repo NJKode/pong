@@ -10,10 +10,12 @@ func _ready() -> void:
 
 func _track_ball(delta: float) -> void:
 	var y_delta = ball.position.y - position.y
+	if (is_zero_approx(y_delta)):
+		return
+
 	var direction = y_delta / abs(y_delta)
 
 	vertical_velocity = direction * speed
-	print(vertical_velocity)
 	_move(delta)
 
 func _process(delta: float) -> void:

@@ -7,10 +7,11 @@ var ball: Area2D
 var ball_velocity: Vector2
 var screen_size: Vector2
 
-var player: Area2D
-var opponent: Area2D
+var player: Paddle
+var opponent: Paddle
 var victory_zone_id: String
 var defeat_zone_id: String
+var game_reset_timer: Timer
 
 var player_score = 0
 var opponent_score = 0
@@ -21,6 +22,7 @@ func _ready() -> void:
 	ball = get_node("Ball")
 	player = get_node("Player")
 	opponent = get_node("Opponent")
+	game_reset_timer = $GameResetTimer
 
 	var field = get_node("Field")
 	victory_zone_id = field.get_node("VictoryZone").name
@@ -30,7 +32,12 @@ func _ready() -> void:
 
 
 func reset_game() -> void:
+	ball_velocity = Vector2.ZERO
 	ball.position = initial_position
+	game_reset_timer.start()
+
+func _on_game_reset_timer_timeout() -> void:
+	game_reset_timer.stop()
 	ball_velocity = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
 	ball_velocity = ball_velocity.normalized()
 

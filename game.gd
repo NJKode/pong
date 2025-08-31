@@ -13,6 +13,7 @@ var opponent: Paddle
 var victory_zone_id: String
 var defeat_zone_id: String
 var game_reset_timer: Timer
+var ui: CanvasLayer
 
 var player_score = 0
 var opponent_score = 0
@@ -24,6 +25,7 @@ func _ready() -> void:
 	player = get_node("Player")
 	opponent = get_node("Opponent")
 	game_reset_timer = $GameResetTimer
+	ui = $UI
 
 	var field = get_node("Field")
 	victory_zone_id = field.get_node("VictoryZone").name
@@ -37,9 +39,11 @@ func reset_game() -> void:
 	ball.position = initial_position
 	game_reset_timer.start()
 
+
 func _on_game_reset_timer_timeout() -> void:
 	game_reset_timer.stop()
 	_set_initial_ball_velocity()
+
 
 func _set_initial_ball_velocity() -> void:
 	ball_velocity = Vector2(1, 0).rotated(randf_range(PI / -4, PI / 4))
@@ -48,14 +52,16 @@ func _set_initial_ball_velocity() -> void:
 		ball_velocity.x *= -1
 	ball_velocity = ball_velocity.normalized()
 
+
 func opponent_score_point() -> void:
 	opponent_score += 1
-	print("Opponent score is now ", opponent_score)
+	ui.update_opponent_score(opponent_score)
 	reset_game()
+
 
 func score_point() -> void:
 	player_score += 1
-	print("Score is now ", player_score)
+	ui.update_player_score(player_score)
 	reset_game()
 
 
@@ -71,6 +77,7 @@ func _process(delta: float) -> void:
 	_barrier_bounce()
 		
 	ball.position += ball_velocity * ball_speed * delta
+
 
 func _paddle_bounce(surface: Paddle) -> void:
 	var surface_spin = surface.vertical_velocity * spin_coeff / 10000

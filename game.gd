@@ -38,9 +38,14 @@ func reset_game() -> void:
 
 func _on_game_reset_timer_timeout() -> void:
 	game_reset_timer.stop()
-	ball_velocity = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
-	ball_velocity = ball_velocity.normalized()
+	_set_initial_ball_velocity()
 
+func _set_initial_ball_velocity() -> void:
+	ball_velocity = Vector2(1, 0).rotated(randf_range(PI / -4, PI / 4))
+	var go_left = randi() % 2 == 0
+	if go_left:
+		ball_velocity.x *= -1
+	ball_velocity = ball_velocity.normalized()
 
 func opponent_score_point() -> void:
 	opponent_score += 1
@@ -60,11 +65,8 @@ func _handle_bounce() -> void:
 	):
 		ball_velocity = Vector2(ball_velocity.x, -1 * ball_velocity.y)
 
-	# Handle player/enemy hit
-
 	 
 func _process(delta: float) -> void:
-	# var horizontal_line = Vector2(1.0, 0.0)
 	_handle_bounce()
 		
 	ball.position += ball_velocity * ball_speed * delta

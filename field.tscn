@@ -1,6 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://br7u2y2vivpuh"]
-
-[ext_resource type="Script" path="res://field.gd" id="1_0cutk"]
+[gd_scene load_steps=4 format=3 uid="uid://br7u2y2vivpuh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cutk"]
 size = Vector2(900, 4)
@@ -12,7 +10,6 @@ size = Vector2(900, 4)
 size = Vector2(20, 600)
 
 [node name="Field" type="Node2D"]
-script = ExtResource("1_0cutk")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 900.0

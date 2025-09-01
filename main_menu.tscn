@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl5v0hqybpn34"]
+
+[ext_resource type="Script" uid="uid://coyp5wjc8ral6" path="res://main_menu.gd" id="1_06t4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhts7"]
+font_size = 50
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_06t4h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -11.5
+offset_right = 22.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pong!"
+label_settings = SubResource("LabelSettings_rhts7")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = 43.54
+offset_right = 23.0
+offset_bottom = 74.54
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

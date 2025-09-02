@@ -1,8 +1,11 @@
 extends Node2D
 
+signal game_end
+
 @export var ball_speed: int = 200
 @export var initial_position = Vector2(450, 300)
 @export var spin_coeff: int = 15
+@export var score_needed_to_win: int = 10
 
 var ball: Area2D
 var ball_velocity: Vector2
@@ -31,7 +34,7 @@ func _ready() -> void:
 	victory_zone_id = field.get_node("VictoryZone").name
 	defeat_zone_id = field.get_node("DefeatZone").name
 
-	reset_game()
+	# reset_game()
 
 
 func reset_game() -> void:
@@ -52,16 +55,22 @@ func _set_initial_ball_velocity() -> void:
 		ball_velocity.x *= -1
 	ball_velocity = ball_velocity.normalized()
 
+func end_game(player_did_win: bool) -> void:
+	print(player_did_win)
+	game_end.emit(player_did_win)
 
 func opponent_score_point() -> void:
 	opponent_score += 1
 	ui.update_opponent_score(opponent_score)
+	if opponent_score >= score_needed_to_win:
+		return end_game(false)
 	reset_game()
-
 
 func score_point() -> void:
 	player_score += 1
 	ui.update_player_score(player_score)
+	if player_score >= score_needed_to_win:
+		return end_game(true)
 	reset_game()
 
 

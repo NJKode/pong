@@ -56,7 +56,6 @@ func _set_initial_ball_velocity() -> void:
 	ball_velocity = ball_velocity.normalized()
 
 func end_game(player_did_win: bool) -> void:
-	print(player_did_win)
 	game_end.emit(player_did_win)
 
 func opponent_score_point() -> void:

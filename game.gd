@@ -49,7 +49,7 @@ func _on_game_reset_timer_timeout() -> void:
 
 
 func _set_initial_ball_velocity() -> void:
-	ball_velocity = Vector2(1, 0).rotated(randf_range(PI / -4, PI / 4))
+	ball_velocity = Vector2(1, 0).rotated(randf_range(PI / -8, PI / 8))
 	var go_left = randi() % 2 == 0
 	if go_left:
 		ball_velocity.x *= -1

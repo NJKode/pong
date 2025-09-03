@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1gd5k3k37px2"]
+[gd_scene load_steps=8 format=3 uid="uid://d1gd5k3k37px2"]
 
 [ext_resource type="Script" uid="uid://qkrand7jm1ml" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="PackedScene" uid="uid://br7u2y2vivpuh" path="res://field.tscn" id="1_e2o6t"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi1nsi3fom8k1" path="res://opponent.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cogj3qw0x15gr" path="res://ball.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://di1haqidves30" path="res://ui.tscn" id="6_ryrav"]
+[ext_resource type="AudioStream" path="sfx/hit.wav" id="7_eow3j"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7jktm")
@@ -26,6 +27,9 @@ position = Vector2(450, 300)
 [node name="GameResetTimer" type="Timer" parent="."]
 
 [node name="UI" parent="." instance=ExtResource("6_ryrav")]
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_eow3j")
 
 [connection signal="area_entered" from="Ball" to="." method="_on_ball_area_entered"]
 [connection signal="timeout" from="GameResetTimer" to="." method="_on_game_reset_timer_timeout"]

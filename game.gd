@@ -90,6 +90,7 @@ func _process(delta: float) -> void:
 
 func _paddle_bounce(surface: Paddle) -> void:
 	var surface_spin = surface.vertical_velocity * spin_coeff / 10000
+	$Hit.play()
 
 	ball_velocity = Vector2(
 		-1 * ball_velocity.x,

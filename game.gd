@@ -51,40 +51,37 @@ func _set_initial_ball_velocity() -> void:
 		ball_velocity.x *= -1
 	ball_velocity = ball_velocity.normalized()
 
+
 func end_game(player_one_win: bool) -> void:
 	var end_text = "Player one wins!" if player_one_win else "Player two wins!"
 	game_end.emit(end_text)
 
 
-func player_two_score_point() -> void:
-	player_two_score += 1
-	ui.update_player_two_score(player_two_score)
-	if player_two_score >= score_needed_to_win:
-		return end_game(false)
-	reset_game()
-
-func player_one_score_point() -> void:
+func _player_one_score_point() -> void:
 	player_one_score += 1
 	ui.update_player_one_score(player_one_score)
 	if player_one_score >= score_needed_to_win:
 		return end_game(true)
 	reset_game()
 
-func _barrier_bounce() -> void:
+
+func _player_two_score_point() -> void:
+	player_two_score += 1
+	ui.update_player_two_score(player_two_score)
+	if player_two_score >= score_needed_to_win:
+		return end_game(false)
+	reset_game()
+
+
+func _handle_barrier_bounce() -> void:
 	if (
 		(ball.position.y <= 5.0 and ball_velocity.y < 0) or
 		(ball.position.y >= screen_size.y - 5 and ball_velocity.y > 0)
 	):
 		ball_velocity = Vector2(ball_velocity.x, -1 * ball_velocity.y)
 
-	 
-func _process(delta: float) -> void:
-	_barrier_bounce()
-		
-	ball.position += ball_velocity * ball_speed * delta
 
-
-func _paddle_bounce(surface: Paddle) -> void:
+func _handle_paddle_bounce(surface: Paddle) -> void:
 	var surface_spin = surface.vertical_velocity * spin_coeff / 10000
 	$Hit.play()
 
@@ -97,8 +94,14 @@ func _paddle_bounce(surface: Paddle) -> void:
 func _on_ball_area_entered(area: Area2D) -> void:
 	match area.name:
 		player_one.name, player_two.name:
-			_paddle_bounce(area)
+			_handle_paddle_bounce(area)
 		defeat_zone_id:
-			player_two_score_point()
+			_player_two_score_point()
 		victory_zone_id:
-			player_one_score_point()
+			_player_one_score_point()
+
+
+func _process(delta: float) -> void:
+	_handle_barrier_bounce()
+		
+	ball.position += ball_velocity * ball_speed * delta

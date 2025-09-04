@@ -8,10 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://di1haqidves30" path="res://ui.tscn" id="6_ryrav"]
 [ext_resource type="AudioStream" uid="uid://c7kew8y2ko86f" path="res://sfx/hit.wav" id="7_eow3j"]
 
-[node name="SinglePlayerGame" type="Node2D" node_paths=PackedStringArray("player_two")]
+[node name="SinglePlayerGame" type="Node2D" node_paths=PackedStringArray("player_one", "player_two")]
 script = ExtResource("1_7jktm")
 ball_speed = 400
 score_needed_to_win = 5
+player_one = NodePath("Player")
 player_two = NodePath("Opponent")
 
 [node name="Field" parent="." instance=ExtResource("1_e2o6t")]

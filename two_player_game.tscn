@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi4twdiplhgck"]
+[gd_scene load_steps=7 format=3 uid="uid://bi4twdiplhgck"]
 
 [ext_resource type="Script" uid="uid://b3upoismx6vlf" path="res://two_player_game.gd" id="1_ick45"]
 [ext_resource type="PackedScene" uid="uid://br7u2y2vivpuh" path="res://field.tscn" id="1_xx1xr"]
-[ext_resource type="PackedScene" uid="uid://bi1nsi3fom8k1" path="res://opponent.tscn" id="2_ick45"]
 [ext_resource type="PackedScene" uid="uid://btruv4yfeq0cu" path="res://player.tscn" id="3_6vvnj"]
 [ext_resource type="PackedScene" uid="uid://cogj3qw0x15gr" path="res://ball.tscn" id="4_opcn3"]
 [ext_resource type="PackedScene" uid="uid://di1haqidves30" path="res://ui.tscn" id="5_umqi2"]
@@ -16,9 +15,11 @@ ball_speed = 400
 
 [node name="Player" parent="." instance=ExtResource("3_6vvnj")]
 position = Vector2(40, 300)
+player_mode = 1
 
-[node name="Opponent" parent="." instance=ExtResource("2_ick45")]
+[node name="PlayerTwo" parent="." instance=ExtResource("3_6vvnj")]
 position = Vector2(860, 300)
+player_mode = 2
 
 [node name="Ball" parent="." instance=ExtResource("4_opcn3")]
 position = Vector2(450, 300)

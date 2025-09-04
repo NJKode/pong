@@ -11,7 +11,7 @@
 [node name="SinglePlayerGame" type="Node2D"]
 script = ExtResource("1_7jktm")
 ball_speed = 400
-score_needed_to_win = 5
+score_needed_to_win = 1
 
 [node name="Field" parent="." instance=ExtResource("1_e2o6t")]
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1gd5k3k37px2"]
 
-[ext_resource type="Script" uid="uid://qkrand7jm1ml" path="res://game.gd" id="1_7jktm"]
+[ext_resource type="Script" uid="uid://kyy7l75pwt33" path="res://single_player_game.gd" id="1_7jktm"]
 [ext_resource type="PackedScene" uid="uid://br7u2y2vivpuh" path="res://field.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://btruv4yfeq0cu" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bi1nsi3fom8k1" path="res://opponent.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cogj3qw0x15gr" path="res://ball.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://di1haqidves30" path="res://ui.tscn" id="6_ryrav"]
-[ext_resource type="AudioStream" path="sfx/hit.wav" id="7_eow3j"]
+[ext_resource type="AudioStream" uid="uid://c7kew8y2ko86f" path="res://sfx/hit.wav" id="7_eow3j"]
 
-[node name="Game" type="Node2D"]
+[node name="SinglePlayerGame" type="Node2D"]
 script = ExtResource("1_7jktm")
 ball_speed = 400
 score_needed_to_win = 5

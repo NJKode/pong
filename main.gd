@@ -1,11 +1,17 @@
 extends Node
 
-var game_scene = preload("res://game.tscn")
+var single_player_game_scene = preload("res://single_player_game.tscn")
+var two_player_game_scene = preload("res://two_player_game.tscn")
+
 var game
 
-func start_game():
+func start_game(start_two_player_game: bool):
 	$MainMenu.hide()
-	game = game_scene.instantiate()
+	if start_two_player_game:
+		game = two_player_game_scene.instantiate()
+	else:
+		game = single_player_game_scene.instantiate()
+
 	get_tree().root.add_child(game)
 	game.game_end.connect(end_game)
 	game.reset_game()

@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi4twdiplhgck"]
+
+[ext_resource type="Script" uid="uid://b3upoismx6vlf" path="res://two_player_game.gd" id="1_ick45"]
+[ext_resource type="PackedScene" uid="uid://br7u2y2vivpuh" path="res://field.tscn" id="1_xx1xr"]
+[ext_resource type="PackedScene" uid="uid://bi1nsi3fom8k1" path="res://opponent.tscn" id="2_ick45"]
+[ext_resource type="PackedScene" uid="uid://btruv4yfeq0cu" path="res://player.tscn" id="3_6vvnj"]
+[ext_resource type="PackedScene" uid="uid://cogj3qw0x15gr" path="res://ball.tscn" id="4_opcn3"]
+[ext_resource type="PackedScene" uid="uid://di1haqidves30" path="res://ui.tscn" id="5_umqi2"]
+[ext_resource type="AudioStream" uid="uid://c7kew8y2ko86f" path="res://sfx/hit.wav" id="6_qhqij"]
+
+[node name="TwoPlayerGame" type="Node2D"]
+script = ExtResource("1_ick45")
+ball_speed = 400
+
+[node name="Field" parent="." instance=ExtResource("1_xx1xr")]
+
+[node name="Player" parent="." instance=ExtResource("3_6vvnj")]
+position = Vector2(40, 300)
+
+[node name="Opponent" parent="." instance=ExtResource("2_ick45")]
+position = Vector2(860, 300)
+
+[node name="Ball" parent="." instance=ExtResource("4_opcn3")]
+position = Vector2(450, 300)
+
+[node name="GameResetTimer" type="Timer" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("5_umqi2")]
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qhqij")
+
+[connection signal="area_entered" from="Ball" to="." method="_on_ball_area_entered"]
+[connection signal="timeout" from="GameResetTimer" to="." method="_on_game_reset_timer_timeout"]

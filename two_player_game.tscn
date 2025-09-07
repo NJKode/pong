@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://c7kew8y2ko86f" path="res://sfx/hit.wav" id="6_qhqij"]
 
 [node name="TwoPlayerGame" type="Node2D" node_paths=PackedStringArray("player_one", "player_two")]
-scale = Vector2(1, 1.09302)
 script = ExtResource("1_ick45")
 ball_speed = 400
 player_one = NodePath("PlayerOne")
